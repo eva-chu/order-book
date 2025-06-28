@@ -1,28 +1,8 @@
-import { type Order } from "@/types/orderbook";
 import QuoteRow from "./QuoteRow";
+import { useOrderBook } from "../hooks/useOrderBook";
 
 export default function OrderBook() {
-  const dummyBuyOrders: Order[] = [
-    { price: 21664.5, size: 591 },
-    { price: 21662.0, size: 118 },
-    { price: 21650.0, size: 40 },
-    { price: 21629.0, size: 461 },
-    { price: 21623.5, size: 3691 },
-    { price: 21618.0, size: 19838 },
-    { price: 21617.0, size: 1177 },
-    { price: 21613.5, size: 2730 },
-  ];
-
-  const dummySellOrders: Order[] = [
-    { price: 21669.0, size: 3691 },
-    { price: 21693.5, size: 461 },
-    { price: 21680.5, size: 53 },
-    { price: 21680.0, size: 836 },
-    { price: 21672.0, size: 40 },
-    { price: 21669.0, size: 210 },
-    { price: 21665.5, size: 331 },
-    { price: 21665.0, size: 35 },
-  ];
+  const { buyOrders, sellOrders } = useOrderBook();
 
   return (
     <div className="h-full flex items-center justify-center">
@@ -37,13 +17,13 @@ export default function OrderBook() {
             </tr>
           </thead>
           <tbody>
-            <QuoteRow orders={dummySellOrders} isBuy={false} />
+            <QuoteRow orders={sellOrders} isBuy={false} />
             <tr>
               <td colSpan={2} className="text-center py-1">
                 -----
               </td>
             </tr>
-            <QuoteRow orders={dummyBuyOrders} isBuy={true} />
+            <QuoteRow orders={buyOrders} isBuy={true} />
           </tbody>
         </table>
       </div>

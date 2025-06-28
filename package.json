@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "ws": "^8.18.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
@@ -28,5 +29,10 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5"
-  }
+  },
+  "description": "A React-based Order Book UI challenge built for BTSE assignment.",
+  "main": "eslint.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }
