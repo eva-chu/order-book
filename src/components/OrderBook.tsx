@@ -1,8 +1,9 @@
-import QuoteRow from "./QuoteRow";
+import QuoteRows from "./QuoteRows";
 import { useOrderBook } from "../hooks/useOrderBook";
+import LastPrice from "./LastPrice";
 
 export default function OrderBook() {
-  const { buyOrders, sellOrders } = useOrderBook();
+  const { buyOrders, sellOrders, hasInitialized } = useOrderBook();
 
   return (
     <div className="h-full flex items-center justify-center">
@@ -17,13 +18,13 @@ export default function OrderBook() {
             </tr>
           </thead>
           <tbody>
-            <QuoteRow orders={sellOrders} isBuy={false} />
-            <tr>
-              <td colSpan={2} className="text-center py-1">
-                -----
-              </td>
-            </tr>
-            <QuoteRow orders={buyOrders} isBuy={true} />
+            {hasInitialized && (
+              <>
+                <QuoteRows orders={sellOrders} isBuy={false} />
+                <LastPrice />
+                <QuoteRows orders={buyOrders} isBuy={true} />
+              </>
+            )}
           </tbody>
         </table>
       </div>

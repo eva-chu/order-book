@@ -1,4 +1,4 @@
-export type Order = {
+export type TOrder = {
   price: number;
   size: number;
 };
