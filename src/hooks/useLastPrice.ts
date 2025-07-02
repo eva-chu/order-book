@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-const ORDER_BOOK_URL = "ws://localhost:4000";
+const ORDER_BOOK_URL = "wss://ws.btse.com/ws/futures";
 const TOPIC = "tradeHistoryApi:BTCPFC";
 
 interface ILastPrice {
@@ -20,6 +20,7 @@ export const useLastPrice = () => {
 
   useEffect(() => {
     ws.current = new WebSocket(ORDER_BOOK_URL);
+
     ws.current.onopen = () => {
       console.log("Connected");
       ws.current?.send(
@@ -36,9 +37,18 @@ export const useLastPrice = () => {
           topic: string;
           data: ILastPrice[];
         };
-        const data = message.data;
-        if (message.topic === TOPIC && data[0]) {
-          const currPrice = data[0].price;
+
+        if (
+          message.topic === "tradeHistoryApi" &&
+          Array.isArray(message.data) &&
+          message.data.length > 0
+        ) {
+          const latest = message.data.reduce((a, b) =>
+            a.timestamp > b.timestamp ? a : b
+          );
+
+          const currPrice = latest.price;
+
           if (currPrice !== undefined) {
             setPrevPrice(prevPriceRef.current);
             prevPriceRef.current = currPrice;

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import type { TOrder } from "../types/orderbook";
 
-const ORDER_BOOK_URL = "ws://localhost:4000";
+const ORDER_BOOK_URL = "wss://ws.btse.com/ws/oss/futures";
 const TOPIC = "update:BTCPFC";
 
 interface IOrderBookUpdate {
